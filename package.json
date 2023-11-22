@@ -1,0 +1,17 @@
+{
+  "name": "typewithfun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i style.css -o outputStyle.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "remark-pdf": "^0.0.13"
+  }
+}

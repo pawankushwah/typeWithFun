@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice</title>
+    <link rel="stylesheet" href="outputStyle.css">
+    <script src="./practiceParagraph/test_english.js"></script>
+</head>
+
+<body class="bg-blue-500 font-[verdana] transition-all ease-in-out duration-500 select-none">
+
+    <div class="w-screen h-screen flex justify-center items-center py-40">
+
+        <!-- Starting Window -->
+        <div
+            class="bg-purple-200 mx-5 sm:bg-green-200 md:bg-yellow-200 lg:bg-blue-200 xl:bg-violet-200 md:mx-2/3 lg:max-w-4xl rounded-lg ">
+            <div class="text-2xl p-4 border-b-2 border-gray-400">Start Typing Practice</div>
+            <div id="typingForm" class="flex flex-col md:grid md:grid-cols-2 p-5 xs:px-10 md:px-40 space-y-2">
+                <label for="name" class="flex items-center p-2 text-blue-600">Name :</label>
+                <input id="name" required class="border-2 border-gray-500 rounded-lg p-1  outline-blue-500">
+                <label for="time" class="flex items-center p-2 text-blue-600">Time Limit (in minutes) :</label>
+                <select id="time" required class="border-2 border-gray-500 rounded-lg p-1  outline-blue-500 ">
+                    <option value="1">1 Minute</option>
+                    <option value="2">2 Minute</option>
+                    <option value="3">3 Minute</option>
+                    <option value="4">4 Minute</option>
+                    <option value="5">5 Minute</option>
+                    <option value="10">10 Minute</option>
+                    <option value="15">15 Minute</option>
+                    <option value="20">20 Minute</option>
+                    <option value="25">25 Minute</option>
+                    <option value="30">30 Minute</option>
+                </select>
+                <label for="paragraph" class="flex items-center p-2 text-blue-600">Typing Paragraph :</label>
+                <select id="paragraph" rows="4" required
+                    class="border-2 border-gray-500 rounded-lg p-1  outline-blue-500">
+                </select>
+                <div class="col-span-2 text-center pt-4">
+                    <a id="startTypingTest" href="./englishTyping.html"
+                        class="bg-blue-500 hover:bg-blue-600 text-white p-2 px-20 rounded-lg">Start Typing</a>
+                </div>
+            </div>
+            <div class="border-t-2 border-gray-400 p-4 flex justify-center items-center space-x-2">
+                <button
+                    class="bg-white text-blue-500 border-2 border-blue-500 hover:bg-blue-600 hover:text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Tips
+                    and Tricks</button>
+                <button
+                    class="bg-white text-blue-500 border-2 border-blue-500 hover:bg-blue-600 hover:text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Practice</button>
+            </div>
+        </div>
+
+        <!-- Typing Window -->
+    </div>
+</body>
+<script src="./fullscreen.js"></script>
+<script>
+    const startTypingTest = document.getElementById("startTypingTest");
+
+    // sets the fullscreen button on the viewport
+    const fullScreenBtn = getFullScreenBtn();
+    document.body.appendChild(fullScreenBtn);
+
+    // loaded the paragraph that can be used for typing
+    const paragraph = document.getElementById("paragraph");
+    paragraph.innerHTML = ``;
+    test_english.forEach(({id, title, description}) => {
+        console.log("Loading... Script");
+        paragraph.innerHTML += `<option value=${id}>${title}</option>`;
+    });
+
+    startTypingTest.onclick = () => {
+        const name = document.getElementById("name").value;
+        const time = document.getElementById("time").value;
+        const paragraphId = document.querySelector("#paragraph").value;
+        localStorage.setItem('currentUser', name);
+        localStorage.setItem('time', time);
+        localStorage.setItem('typingType', 'english');
+        localStorage.setItem('paragraphId', paragraphId);
+    }
+</script>
+
+</html>

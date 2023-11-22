@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice</title>
+    <link rel="stylesheet" href="outputStyle.css">
+    <script src="./practiceParagraph/test_english.js"></script>
+</head>
+
+<body class="bg-blue-500 transition-all ease-in-out duration-500 select-none">
+
+    <!-- Countdown frame -->
+    <iframe src="./countdown.html" id="countdownFrame" frameborder="0"
+        class="fixed w-screen h-screen overflow-hidden z-10"></iframe>
+
+    <div class="w-screen h-screen flex justify-center items-center">
+
+        <!-- Starting Window -->
+        <div
+            id="typingWindow"
+            class="opacity-1 z-1 bg-purple-200 mx-5 sm:bg-green-200 md:bg-yellow-200 lg:bg-blue-200 xl:bg-violet-200 md:mx-2/3 lg:max-w-4xl rounded-lg ">
+            <div class="text-3xl p-4 border-b-2 border-gray-400 flex justify-between items-center">
+                <div>English Typing Practice</div>
+                <div id="timer" class="border-2 border-gray-400 p-2 min-w-20">00:00</div>
+            </div>
+            <div class="p-5 space-y-2">
+                <!-- <div class="flex justify-between items-center"> -->
+                <form name="optionsForm" class="flex justify-around items-center">
+
+                    <span>
+                        <label for="backspaceOption">Backspace:</label>
+                        <input type="checkbox" id="backspaceOption" checked>
+                    </span>
+                    <span id="highlightType">
+                        <span class="font-bold">Highlight:</span>
+                        <span>
+                            <label for="character_highlighting_option">Character</label>
+                            <input type="radio" name="highlightOption" id="character_highlighting_option"
+                                value="character" checked>
+                        </span>
+                        <span>
+                            <label for="word_highlighting_option">Word</label>
+                            <input type="radio" name="highlightOption" id="word_highlighting_option" value="word">
+                        </span>
+                    </span>
+                    <!-- <span>
+                            <label for="typingFieldOption">Typing Field:</label>
+                            <input type="checkbox" id="typingFieldOption" checked>
+                        </span> -->
+
+                </form>
+
+                <!-- </div> -->
+                <div id="paragraphToType"
+                    class="border-2 border-gray-400 p-2 max-h-96 overflow-auto text-2xl text-gray-500">
+                    <!-- <span class="text-blue-500 before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-1 before:w-full before:bg-blue-500">P</span> -->
+                </div>
+                <input id="typingField" type="text" class="border-2 border-gray-400 p-2 text-2xl w-full select-none" autocomplete="off" autofocus>
+            </div>
+            <div class="border-t-2 border-gray-400 p-4 flex justify-center items-center space-x-2">
+                <button
+                    class="bg-white text-blue-500 border-2 border-blue-500 hover:bg-blue-600 hover:text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Tips
+                    and Tricks</button>
+                <button id="submitBtn"
+                    class="hover:bg-white hover:text-blue-500 hover:border-2 hover:border-blue-500 bg-blue-600 text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Submit</button>
+            </div>
+        </div>
+
+        <!-- Result Window -->
+        <div id="resultWindow"
+            class="hidden opacity-0 z-0 bg-purple-200 mx-5 sm:bg-green-200 md:bg-yellow-200 lg:bg-blue-200 xl:bg-violet-200 md:mx-2/3 lg:max-w-4xl rounded-lg ">
+            <div class="text-3xl p-4 border-b-2 border-gray-400 flex justify-between items-center">
+                <div>
+                    <span id="userNameInResult"></span>
+                    Result's
+                </div>
+                <!-- <div id="timer" class="border-2 border-gray-400 p-2 min-w-20">00:00</div> -->
+            </div>
+
+            <div class="p-5 space-y-2 justify-around items-center w-full">
+                <div class="w-full">
+                    <table class="border-2 border-gray-500 w-full mb-2">
+                        <thead class="border-2 border-gray-500 font-bold text-2xl text-center bg-blue-300">Complete Result</thead>
+                        <tbody>
+                            <tr>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Time Duration</td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultTime"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Right Word</td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultRightWordCount"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Wrong Word</td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultWrongWordCount"></td>
+                            </tr>
+                            <tr>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Skip Word</td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultSkipWordCount"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Double Word</td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultDoubleWordCount"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Total Key Press
+                                </td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultTotalKeyPressCount"></td>
+                            </tr>
+                            <tr>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Backspace Press
+                                </td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultBackSpacePressCount"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Delete Key Press
+                                </td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultDeleteKeyPressCount"></td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2">Total Word Error
+                                </td>
+                                <td class="border-2 border-b-2 border-gray-400 border-b-gray-300 p-2 w-20" id="resultTotalWordErrorCount"></td>
+                            </tr>
+                            <tr>
+                                <td class="border-2 border-gray-400 p-2">Extra Word</td>
+                                <td class="border-2 border-gray-400 p-2" id="resultExtraWordCount"></td>
+                                <td class="border-2 border-gray-400 p-2"></td>
+                                <td class="border-2 border-gray-400 p-2"></td>
+                                <td class="border-2 border-gray-400 p-2"></td>
+                                <td class="border-2 border-gray-400 p-2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="flex w-full border-2 border-gray-600 my-4">
+                        <span class="w-full p-2">Net WPM</span>
+                        <span class="w-full p-2 border-x-2 border-gray-600"></span>
+                        <span class="w-full p-2 border-x-2 border-gray-600">Accuracy</span>
+                        <span class="w-full p-2 "></span>
+                    </div>
+
+                    <div class="border-2 border-gray-800 p-2">
+                        <div>
+                            <span class="font-bold">Extra Word -</span>
+                            <span></span>
+                        </div>
+                        <div>
+                            <span class="font-bold">Double Word -</span>
+                            <span></span>
+                        </div>
+                        <div>
+                            <span class="font-bold">Skip Word -</span>
+                            <span></span>
+                        </div>
+                        <div>
+                            <span class="font-bold">Wrong Word -</span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t-2 border-gray-400 p-4 flex justify-center items-center space-x-2">
+                <button
+                    class="bg-white text-blue-500 border-2 border-blue-500 hover:bg-blue-600 hover:text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Tips    and Tricks</button>
+                <button
+                    onclick="javascript:navigation.reload()"
+                    class="hover:bg-white hover:text-blue-500 hover:border-2 hover:border-blue-500 bg-blue-600 text-white p-2 px-20 rounded-lg transition-all ease-in-out duration-500">Restart</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="./fullscreen.js"></script>
+<script src="./englishTyping.js"></script>
+
+</html>
